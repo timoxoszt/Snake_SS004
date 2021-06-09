@@ -1,4 +1,5 @@
-#pragma once
+#ifndef _incld_h_
+#define _incld_h_
 
 #include <iostream>
 #include <windows.h>
@@ -20,3 +21,5 @@ void gotoxy( int column, int line )
     coord
     );
   }
+
+#endif
