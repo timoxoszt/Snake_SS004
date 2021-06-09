@@ -1,7 +1,6 @@
 #pragma once
 
 #include <incld.hpp>
-#include <coord.hpp>
 
 class MIENGMOI {
 public:

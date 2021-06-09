@@ -1,5 +1,4 @@
 #include <incld.hpp>
-#include <coord.hpp>
 #include <classes.hpp>
 
 int main()
