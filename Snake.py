@@ -26,7 +26,28 @@ foodflat = True
 direction = 'RIGHT'
 changeto = direction
 score = 0
-
+# hàm gameover
+def game_over():
+    gfont = pygame.font.SysFont('consolas',40)
+    gsurf = gfont.render('Game over!',True,red)
+    grect = gsurf.get_rect()
+    grect.midtop = (360,150)
+    gameSurface.blit(gsurf,grect)
+    show_score(0)
+    pygame.display.flip()
+    time.sleep(5) #time wait to exit
+    pygame.quit()
+    sys.exit()
+# hàm show_score
+def show_score(choice = 1):
+    sfont = pygame.font.SysFont('consolas',20)
+    ssurf = sfont.render('Score: {0}'.format(score),True,black)
+    srect = ssurf.get_rect()
+    if choice == 1:
+        srect.midtop = (70,20)
+    else:
+        srect.midtop = (360,230)
+    gameSurface.blit(ssurf,srect)
 # vòng lặp chính
 while True:
     pygame.time.delay(100) # tốc độ chơi
@@ -44,7 +65,7 @@ while True:
             if event.key == pygame.K_DOWN:
                 changeto = 'DOWN'
             if event.key == pygame.K_ESCAPE:
-                pygame.event.post(pygame.event.Event(pygame.QUIT))
+                pygame.event.post(pygame.evet.Event(pygame.QUIT))
     # hướng đi
     if changeto == 'RIGHT' and not direction == 'LEFT':
         direction = 'RIGHT'
