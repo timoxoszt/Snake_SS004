@@ -1,3 +1,4 @@
+#import
 import pygame,random,time,sys
 pygame.init()
 # load hình ảnh
@@ -8,12 +9,46 @@ Imgfood = pygame.transform.scale(pygame.image.load('Diem.jpg'),(m,m))
 # tạo cửa sổ
 gameSurface = pygame.display.set_mode((835,635))
 pygame.display.set_caption('Snake Slap Slip Slup')
-
+# màu sắc
+red = pygame.Color(255,0,0)
+black = pygame.Color(0,0,0)
+white = pygame.Color(255,255,255)
+gray = pygame.Color(128,128,128)
 # khai báo biến
 snakepos = [100,60]
 snakebody = [[100,60],[80,60],[60,60]]
+foodx = random.randrange(1,80)
+foody = random.randrange(1,60)
+if foodx % 2 != 0: foodx += 1
+if foody % 2 != 0: foody += 1
+foodpos = [foodx * 10, foody * 10]
+foodflat = True
 direction = 'RIGHT'
 changeto = direction
+score = 0
+# hàm gameover
+def game_over():
+    gfont = pygame.font.SysFont('consolas',40)
+    gsurf = gfont.render('Game over!',True,red)
+    grect = gsurf.get_rect()
+    grect.midtop = (360,150)
+    gameSurface.blit(gsurf,grect)
+    show_score(0)
+    pygame.display.flip()
+    time.sleep(5) #time wait to exit
+    pygame.quit()
+    sys.exit()
+# hàm show_score
+def show_score(choice = 1):
+    sfont = pygame.font.SysFont('consolas',20)
+    ssurf = sfont.render('Score: {0}'.format(score),True,black)
+    srect = ssurf.get_rect()
+    if choice == 1:
+        srect.midtop = (70,20)
+    else:
+        srect.midtop = (360,230)
+    gameSurface.blit(ssurf,srect)
+# vòng lặp chính
 while True:
     pygame.time.delay(100) # tốc độ chơi
     for event in pygame.event.get():
@@ -30,7 +65,7 @@ while True:
             if event.key == pygame.K_DOWN:
                 changeto = 'DOWN'
             if event.key == pygame.K_ESCAPE:
-                pygame.event.post(pygame.event.Event(pygame.QUIT))
+                pygame.event.post(pygame.evet.Event(pygame.QUIT))
     # hướng đi
     if changeto == 'RIGHT' and not direction == 'LEFT':
         direction = 'RIGHT'
@@ -49,3 +84,4 @@ while True:
         snakepos[1] -= m
     if direction == 'DOWN':
         snakepos[1] += m
+    pygame.display.flip()
