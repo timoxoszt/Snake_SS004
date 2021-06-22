@@ -85,3 +85,16 @@ while True:
     if direction == 'DOWN':
         snakepos[1] += m
     pygame.display.flip()
+    # xử lý di chuyển đụng 4 cạnh biên
+    if snakepos[0] > 810 or snakepos[0] < 10:
+        game_over()
+    if snakepos[1] > 610 or snakepos[1] < 10:
+        game_over()
+    # xử lý tự ăn chính mình
+    for b in snakebody[1:]:
+        if snakepos[0] == b[0] and snakepos[1] == b[1]:
+            game_over()
+    # đường viền
+    pygame.draw.rect(gameSurface,gray,(10,10,815,615),2)
+    show_score()
+    pygame.display.flip()
