@@ -103,8 +103,12 @@ while True:
         if foody %2 != 0: foody += 1
         foodpos = [foodx * 10, foody * 10]
     foodflat = True
-    # đường viền
-    pygame.draw.rect(gameSurface,gray,(10,10,815,615),2)
-    show_score()
+    #  cập nhật lên cửa sổ
+    gameSurface.fill(white)
+    for pos in snakebody:
+        gameSurface.blit(Imgbody,pygame.Rect(pos[0],pos[1],m,m))
+    gameSurface.blit(Imghead,pygame.Rect(snakebody[0][0],snakebody[0][1],m,m)) 
+    # head
+    gameSurface.blit(Imgfood,pygame.Rect(foodpos[0],foodpos[1],m,m))
     pygame.display.flip()
    
