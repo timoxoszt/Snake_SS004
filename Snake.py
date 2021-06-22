@@ -85,8 +85,9 @@ while True:
         snakepos[1] -= m
     if direction == 'DOWN':
         snakepos[1] += m
-        
+
     pygame.display.flip()
+   
 
     #cơ chế thêm khúc dài ra
     snakebody.insert(0,list(snakepos))
@@ -104,6 +105,7 @@ while True:
         foodpos = [foodx * 10, foody * 10]
     foodflat = True 
     pygame.display.flip()
+
     #  cập nhật lên cửa sổ
     gameSurface.fill(white)
     for pos in snakebody:
@@ -111,5 +113,20 @@ while True:
     gameSurface.blit(Imghead,pygame.Rect(snakebody[0][0],snakebody[0][1],m,m)) 
     # head
     gameSurface.blit(Imgfood,pygame.Rect(foodpos[0],foodpos[1],m,m))
-  
-   
+     
+     # xử lý di chuyển đụng 4 cạnh biên
+    if snakepos[0] > 810 or snakepos[0] < 10:
+        game_over()
+    if snakepos[1] > 610 or snakepos[1] < 10:
+        game_over()
+    # xử lý tự ăn chính mình
+    for b in snakebody[1:]:
+        if snakepos[0] == b[0] and snakepos[1] == b[1]:
+            game_over()
+    # đường viền
+    pygame.draw.rect(gameSurface,gray,(10,10,815,615),2)
+    show_score()
+    pygame.display.flip()
+        
+    pygame.display.flip()
+
