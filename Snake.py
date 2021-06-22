@@ -1,4 +1,3 @@
-#import
 import pygame,random,time,sys
 pygame.init()
 # load hình ảnh
@@ -67,7 +66,7 @@ while True:
             if event.key == pygame.K_DOWN:
                 changeto = 'DOWN'
             if event.key == pygame.K_ESCAPE:
-                pygame.event.post(pygame.event.Event(pygame.QUIT))
+                pygame.event.post(pygame.evet.Event(pygame.QUIT))
     # hướng đi
     if changeto == 'RIGHT' and not direction == 'LEFT':
         direction = 'RIGHT'
@@ -86,6 +85,8 @@ while True:
         snakepos[1] -= m
     if direction == 'DOWN':
         snakepos[1] += m
+        
+    pygame.display.flip()
 
     #cơ chế thêm khúc dài ra
     snakebody.insert(0,list(snakepos))
