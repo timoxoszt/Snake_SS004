@@ -1,4 +1,3 @@
-#import
 import pygame,random,time,sys
 pygame.init()
 # load hình ảnh
@@ -25,6 +24,7 @@ foodpos = [foodx * 10, foody * 10]
 foodflat = True
 direction = 'RIGHT'
 changeto = direction
+
 score = 0
 # hàm gameover
 def game_over():
@@ -49,6 +49,7 @@ def show_score(choice = 1):
         srect.midtop = (360,230)
     gameSurface.blit(ssurf,srect)
 # vòng lặp chính
+
 while True:
     pygame.time.delay(100) # tốc độ chơi
     for event in pygame.event.get():
@@ -84,8 +85,28 @@ while True:
         snakepos[1] -= m
     if direction == 'DOWN':
         snakepos[1] += m
+
     pygame.display.flip()
-    # xử lý di chuyển đụng 4 cạnh biên
+   
+
+    #cơ chế thêm khúc dài ra
+    snakebody.insert(0,list(snakepos))
+    if snakepos[0] == foodpos[0] and snakepos[1] == foodpos[1]:
+        score += 1
+        foodflat = False
+    else:
+        snakebody.pop()
+    # sản sinh mồi
+    if foodflat == False:
+        foodx = random.randrange(1,80)
+        foody = random.randrange(1,60)
+        if foodx %2 != 0: foodx += 1
+        if foody %2 != 0: foody += 1
+        foodpos = [foodx * 10, foody * 10]
+    foodflat = True
+    pygame.display.flip()
+
+     # xử lý di chuyển đụng 4 cạnh biên
     if snakepos[0] > 810 or snakepos[0] < 10:
         game_over()
     if snakepos[1] > 610 or snakepos[1] < 10:
@@ -97,4 +118,6 @@ while True:
     # đường viền
     pygame.draw.rect(gameSurface,gray,(10,10,815,615),2)
     show_score()
+    pygame.display.flip()
+        
     pygame.display.flip()
