@@ -25,6 +25,7 @@ foodpos = [foodx * 10, foody * 10]
 foodflat = True
 direction = 'RIGHT'
 changeto = direction
+
 score = 0
 # hàm gameover
 def game_over():
@@ -49,6 +50,7 @@ def show_score(choice = 1):
         srect.midtop = (360,230)
     gameSurface.blit(ssurf,srect)
 # vòng lặp chính
+
 while True:
     pygame.time.delay(100) # tốc độ chơi
     for event in pygame.event.get():
@@ -84,6 +86,7 @@ while True:
         snakepos[1] -= m
     if direction == 'DOWN':
         snakepos[1] += m
+
     #cơ chế thêm khúc dài ra
     snakebody.insert(0,list(snakepos))
     if snakepos[0] == foodpos[0] and snakepos[1] == foodpos[1]:
