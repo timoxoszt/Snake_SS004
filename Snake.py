@@ -65,7 +65,7 @@ while True:
             if event.key == pygame.K_DOWN:
                 changeto = 'DOWN'
             if event.key == pygame.K_ESCAPE:
-                pygame.event.post(pygame.evet.Event(pygame.QUIT))
+                pygame.event.post(pygame.event.Event(pygame.QUIT))
     # hướng đi
     if changeto == 'RIGHT' and not direction == 'LEFT':
         direction = 'RIGHT'
