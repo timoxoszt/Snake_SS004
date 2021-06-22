@@ -25,7 +25,6 @@ foodpos = [foodx * 10, foody * 10]
 foodflat = True
 direction = 'RIGHT'
 changeto = direction
-
 score = 0
 # hàm gameover
 def game_over():
@@ -50,7 +49,6 @@ def show_score(choice = 1):
         srect.midtop = (360,230)
     gameSurface.blit(ssurf,srect)
 # vòng lặp chính
-
 while True:
     pygame.time.delay(100) # tốc độ chơi
     for event in pygame.event.get():
@@ -67,7 +65,7 @@ while True:
             if event.key == pygame.K_DOWN:
                 changeto = 'DOWN'
             if event.key == pygame.K_ESCAPE:
-                pygame.event.post(pygame.event.Event(pygame.QUIT))
+                pygame.event.post(pygame.evet.Event(pygame.QUIT))
     # hướng đi
     if changeto == 'RIGHT' and not direction == 'LEFT':
         direction = 'RIGHT'
@@ -86,7 +84,6 @@ while True:
         snakepos[1] -= m
     if direction == 'DOWN':
         snakepos[1] += m
-
     #cơ chế thêm khúc dài ra
     snakebody.insert(0,list(snakepos))
     if snakepos[0] == foodpos[0] and snakepos[1] == foodpos[1]:
@@ -102,4 +99,22 @@ while True:
         if foody %2 != 0: foody += 1
         foodpos = [foodx * 10, foody * 10]
     foodflat = True
+    #  cập nhật lên cửa sổ
+    gameSurface.fill(white)
+    for pos in snakebody:
+        gameSurface.blit(Imgbody,pygame.Rect(pos[0],pos[1],m,m))
+    gameSurface.blit(Imghead,pygame.Rect(snakebody[0][0],snakebody[0][1],m,m)) # head
+    gameSurface.blit(Imgfood,pygame.Rect(foodpos[0],foodpos[1],m,m))
+    # xử lý di chuyển đụng 4 cạnh biên
+    if snakepos[0] > 810 or snakepos[0] < 10:
+        game_over()
+    if snakepos[1] > 610 or snakepos[1] < 10:
+        game_over()
+    # xử lý tự ăn chính mình
+    for b in snakebody[1:]:
+        if snakepos[0] == b[0] and snakepos[1] == b[1]:
+            game_over()
+    # đường viền
+    pygame.draw.rect(gameSurface,gray,(10,10,815,615),2)
+    show_score()
     pygame.display.flip()
