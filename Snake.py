@@ -102,7 +102,8 @@ while True:
         if foodx %2 != 0: foodx += 1
         if foody %2 != 0: foody += 1
         foodpos = [foodx * 10, foody * 10]
-    foodflat = True
+    foodflat = True 
+    pygame.display.flip()
     #  cập nhật lên cửa sổ
     gameSurface.fill(white)
     for pos in snakebody:
@@ -110,5 +111,5 @@ while True:
     gameSurface.blit(Imghead,pygame.Rect(snakebody[0][0],snakebody[0][1],m,m)) 
     # head
     gameSurface.blit(Imgfood,pygame.Rect(foodpos[0],foodpos[1],m,m))
-    pygame.display.flip()
+  
    
