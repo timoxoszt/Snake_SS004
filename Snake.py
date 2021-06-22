@@ -103,9 +103,17 @@ while True:
         if foodx %2 != 0: foodx += 1
         if foody %2 != 0: foody += 1
         foodpos = [foodx * 10, foody * 10]
-    foodflat = True
+    foodflat = True 
     pygame.display.flip()
 
+    #  cập nhật lên cửa sổ
+    gameSurface.fill(white)
+    for pos in snakebody:
+        gameSurface.blit(Imgbody,pygame.Rect(pos[0],pos[1],m,m))
+    gameSurface.blit(Imghead,pygame.Rect(snakebody[0][0],snakebody[0][1],m,m)) 
+    # head
+    gameSurface.blit(Imgfood,pygame.Rect(foodpos[0],foodpos[1],m,m))
+     
      # xử lý di chuyển đụng 4 cạnh biên
     if snakepos[0] > 810 or snakepos[0] < 10:
         game_over()
@@ -121,3 +129,4 @@ while True:
     pygame.display.flip()
         
     pygame.display.flip()
+
