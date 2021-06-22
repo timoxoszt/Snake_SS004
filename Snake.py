@@ -103,4 +103,8 @@ while True:
         if foody %2 != 0: foody += 1
         foodpos = [foodx * 10, foody * 10]
     foodflat = True
+    # đường viền
+    pygame.draw.rect(gameSurface,gray,(10,10,815,615),2)
+    show_score()
     pygame.display.flip()
+   
